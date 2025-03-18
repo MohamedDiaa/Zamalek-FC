@@ -42,6 +42,8 @@ struct NewsFeedView: View {
             Text(item.description ?? "")
                 .font(.caption)
                 .foregroundStyle(.secondary)
+
+            Divider()
         }
 
     }
