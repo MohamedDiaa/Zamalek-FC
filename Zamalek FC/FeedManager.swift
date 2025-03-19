@@ -32,5 +32,32 @@ class FeedManager {
 
         }
     }
+}
+
+
+extension FeedManager {
+
+    func fetchFeedWithImages() async -> [ItemFeed]? {
+
+        let rssfeed = await fetchFeed()
+
+        guard let items = rssfeed?.items
+        else { return nil }
+
+        var list: [ItemFeed] = []
+
+        for item in items {
+            if let link = item.link {
+
+                let imgLink = try? await extractImageURL(from: link)
+                list.append(.init(title: item.title,
+                                  description: item.description,
+                                  link: item.link,
+                                  pubDate: item.pubDate,
+                                  image: imgLink))
+            }
+        }
+        return list
+    }
 
 }

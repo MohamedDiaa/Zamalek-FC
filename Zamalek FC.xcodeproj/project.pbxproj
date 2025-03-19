@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		83F7334A2D89794F00A0CD70 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 83F733492D89794F00A0CD70 /* FeedKit */; };
+		83F733862D8AF88000A0CD70 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 83F733852D8AF88000A0CD70 /* SwiftSoup */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83F7334A2D89794F00A0CD70 /* FeedKit in Frameworks */,
+				83F733862D8AF88000A0CD70 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			name = "Zamalek FC";
 			packageProductDependencies = (
 				83F733492D89794F00A0CD70 /* FeedKit */,
+				83F733852D8AF88000A0CD70 /* SwiftSoup */,
 			);
 			productName = "Zamalek FC";
 			productReference = 83F733372D8978AC00A0CD70 /* Zamalek FC.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				83F733482D89794F00A0CD70 /* XCRemoteSwiftPackageReference "FeedKit" */,
+				83F733842D8AF88000A0CD70 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 83F733382D8978AC00A0CD70 /* Products */;
@@ -343,6 +347,14 @@
 				minimumVersion = 9.1.2;
 			};
 		};
+		83F733842D8AF88000A0CD70 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.7;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -350,6 +362,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 83F733482D89794F00A0CD70 /* XCRemoteSwiftPackageReference "FeedKit" */;
 			productName = FeedKit;
+		};
+		83F733852D8AF88000A0CD70 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83F733842D8AF88000A0CD70 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

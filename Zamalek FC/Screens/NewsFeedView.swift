@@ -17,7 +17,7 @@ extension URL {
 struct NewsFeedView: View {
 
     @State var feedManager = FeedManager()
-    @State var rssFeed: [RSSFeedItem] = []
+    @State var rssFeed: [ItemFeed] = []
     @State var isPresentWebView = false
     @State var selectedURL: URL = URL.default
 
@@ -36,8 +36,10 @@ struct NewsFeedView: View {
                 }
             }
             .task {
-                let feed = await feedManager.fetchFeed()
-                rssFeed = feed?.items ?? []
+                //let feed = await feedManager.fetchFeed()
+                //rssFeed = feed?.items ?? []
+
+                rssFeed = await feedManager.fetchFeedWithImages() ?? []
             }
             .sheet(isPresented: $isPresentWebView) {
                 NavigationStack {
@@ -53,13 +55,21 @@ struct NewsFeedView: View {
     }
 
     @ViewBuilder
-    func newsFeedRow(item: RSSFeedItem) -> some View {
+    func newsFeedRow(item: ItemFeed) -> some View {
         VStack(alignment: .trailing) {
             Text(item.title ?? "")
                 .multilineTextAlignment(.trailing)
                 .frame(maxHeight: .infinity)
                 .padding()
 
+            if let imgLink = item.image {
+                AsyncImage(url: imgLink) { img in
+                    img.image?
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+
+                }
+            }
             Text(item.description ?? "")
                 .font(.body)
                 .foregroundStyle(.secondary)
