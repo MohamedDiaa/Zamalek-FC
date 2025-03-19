@@ -8,17 +8,25 @@
 import SwiftUI
 import FeedKit
 
+extension URL {
+    public static var `default` : URL {
+        return URL.init(string: "https://www.zamalektoday.com")!
+    }
+}
+
 struct NewsFeedView: View {
 
     @State var feedManager = FeedManager()
     @State var rssFeed: [RSSFeedItem] = []
+    @State var isPresentWebView = false
+    @State var selectedURL: URL = URL.default
 
     var body: some View {
 
         VStack {
             Text("Zamalek FC")
                 .font(.headline)
-            
+
             ScrollView(.vertical) {
                 VStack {
                     ForEach(rssFeed,id: \.title) { item in
@@ -30,6 +38,16 @@ struct NewsFeedView: View {
             .task {
                 let feed = await feedManager.fetchFeed()
                 rssFeed = feed?.items ?? []
+            }
+            .sheet(isPresented: $isPresentWebView) {
+                NavigationStack {
+                    // 3
+
+                    WebView(url: selectedURL)
+                        .ignoresSafeArea()
+                        .navigationTitle("Zamalek")
+                        .navigationBarTitleDisplayMode(.inline)
+                }
             }
         }
     }
@@ -44,6 +62,14 @@ struct NewsFeedView: View {
                 .foregroundStyle(.secondary)
 
             Divider()
+        }
+        .onTapGesture {
+            guard let link = item.link,
+                  let url = URL.init(string: link)
+            else { return }
+
+            selectedURL = url
+            isPresentWebView = true
         }
 
     }
